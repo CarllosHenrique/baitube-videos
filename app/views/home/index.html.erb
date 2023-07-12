@@ -1,0 +1,32 @@
+<%= render "home/shared/controls" %>
+<div class="row">
+    <% @videos.each do |video| %>
+        <div class="col-lg-4 col-md-6">
+            <a href="<%= video_path(video) %>" class="youtube-card">
+                <div class="card mb-3">
+                    <img src="https://i.ytimg.com/vi/<%= video.identity %>/maxresdefault.jpg" class="card-img-top"
+                        alt="Thumbnail 1">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= video.title %>
+                        </h5>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <%= link_to user_channel_path(video.channel) do %>
+                                    <% if video.channel.avatar.attached?%>
+                                        <%= image_tag video.channel.avatar, class: "avatar-vid" %>
+                                    <% end %>
+                                    <%= video.channel.name %>
+                                <% end %>
+                            </small>
+                        </p>
+                        <p class="card-text"><small class="text-muted">
+                                <%= time_ago_in_words(video.created_at) %>
+                            </small></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <% end %>
+</div>
+

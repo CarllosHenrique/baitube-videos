@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+    <%= form_with(model: @video) do |f|%>
+        <div class="mb-3">
+            <%= f.url_field :video_url , class: "form-control", placeholder: "Cole a URL aqui"%>
+            <%= danger_error_form(@video, :video_url)%>
+        </div>
+        <div class="mb-3">
+            <%= f.text_field :title , class: "form-control", placeholder: "Escreva o titulo do video"%>
+            <%= danger_error_form(@video, :title)%>
+        </div>
+        <div class="mb-3">
+            <%= f.text_area :description , class: "form-control", placeholder: "Descrição do video"%>
+            <%= danger_error_form(@video, :description)%>
+        </div>
+        <%= f.submit "Upload Link", class: "btn btn-primary" %>
+    <% end %>
+    </div>
+</div>
+

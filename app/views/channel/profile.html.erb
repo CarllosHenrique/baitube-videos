@@ -1,0 +1,67 @@
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <div class="text-end">
+          <%= link_to edit_channel_registration_path, class: "btn btn-outline-success" do %>
+            <i class="fa-solid fa-gear"></i>
+          <% end %>
+          <%= link_to destroy_channel_session_path, class: "btn btn-outline-danger",
+            data: {turbo_method: :delete,
+            turbo_confirm: "Are you sure"} do %>
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card">
+         <% if current_channel.avatar.attached?%>
+          <img src="<%= url_for(current_channel.avatar)%>" class="card-img-top">
+         <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= current_channel.name %></h5>
+            <%= link_to new_video_path, class: "btn btn-outline-primary", style:"float: right;" do %>
+              <i class="fa-solid fa-upload"></i>
+            <% end %>
+            <%= link_to my_channel_edit_path, class: "btn btn-outline-secondary" do %>
+              <i class="fa-solid fa-user-pen"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+      <% if current_channel.about.present?%>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Sobre</h5>
+            <p class="card-text"><%= simple_format(current_channel.about) %></p>
+          </div>
+        </div>
+      <% end %>
+        <div class="card mt-4">
+          <div class="card-body">
+            <h5 class="card-title">Seus Videos</h5>
+            <div class="row">
+              <div class="col-md-6">
+              <% current_channel.videos.each do |my_video| %>
+                <%= link_to video_path(my_video) do %>
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <img src="https://i.ytimg.com/vi/<%= my_video.identity %>/maxresdefault.jpg" class="card-img-top"
+                        alt="Thumbnail 1" style="    margin-bottom: 10px;">
+                      <h6 class="card-subtitle mb-2 text-muted"><%= my_video.title %></h6>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

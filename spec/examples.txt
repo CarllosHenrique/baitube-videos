@@ -1,0 +1,30 @@
+example_id                                     | status | run_time        |
+---------------------------------------------- | ------ | --------------- |
+./spec/models/channel_spec.rb[1:1:1]           | passed | 0.00424 seconds |
+./spec/models/channel_spec.rb[1:1:2]           | passed | 0.00507 seconds |
+./spec/models/channel_spec.rb[1:2:1]           | passed | 0.00587 seconds |
+./spec/models/channel_spec.rb[1:2:2]           | passed | 0.00636 seconds |
+./spec/models/channel_spec.rb[1:2:3]           | passed | 0.00475 seconds |
+./spec/models/channel_spec.rb[1:3:1]           | passed | 0.00484 seconds |
+./spec/models/channel_spec.rb[1:3:2]           | passed | 0.00577 seconds |
+./spec/models/channel_spec.rb[1:3:3]           | passed | 0.00522 seconds |
+./spec/models/channel_spec.rb[1:4:1]           | passed | 0.05902 seconds |
+./spec/models/video_spec.rb[1:1:1]             | passed | 0.00991 seconds |
+./spec/models/video_spec.rb[1:1:2]             | passed | 0.01801 seconds |
+./spec/models/video_spec.rb[1:2:1]             | passed | 0.00815 seconds |
+./spec/models/video_spec.rb[1:2:2]             | passed | 0.01161 seconds |
+./spec/models/video_spec.rb[1:2:3]             | passed | 0.00903 seconds |
+./spec/models/video_spec.rb[1:3:1]             | passed | 0.00883 seconds |
+./spec/models/video_spec.rb[1:3:2]             | passed | 0.00896 seconds |
+./spec/models/video_spec.rb[1:3:3]             | passed | 0.00829 seconds |
+./spec/requests/channel_spec.rb[1:1:1]         | passed | 0.01774 seconds |
+./spec/requests/channel_spec.rb[1:1:2]         | passed | 0.0154 seconds  |
+./spec/requests/channel_spec.rb[1:1:3]         | passed | 0.01477 seconds |
+./spec/requests/channel_spec.rb[1:2:1]         | passed | 0.02742 seconds |
+./spec/requests/devise_channels_spec.rb[1:1:1] | passed | 0.17456 seconds |
+./spec/requests/devise_channels_spec.rb[1:1:2] | passed | 0.03011 seconds |
+./spec/requests/devise_channels_spec.rb[1:2:1] | passed | 0.01306 seconds |
+./spec/requests/devise_channels_spec.rb[1:2:2] | passed | 0.04183 seconds |
+./spec/requests/home_spec.rb[1:1]              | passed | 0.01137 seconds |
+./spec/requests/videos_spec.rb[1:1]            | passed | 0.02641 seconds |
+./spec/requests/videos_spec.rb[1:2:1]          | passed | 0.01702 seconds |

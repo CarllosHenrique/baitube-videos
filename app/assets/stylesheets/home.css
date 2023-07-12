@@ -1,0 +1,33 @@
+body{
+    background-color: #212529!important;
+}
+
+
+@media (min-width: 480px) {
+    .col-lg-4.col-md-6{
+        width: 290px;
+    }
+
+}
+
+
+
+.youtube-card{
+    text-decoration: none;
+}
+
+
+.card-body .card-title{
+    color: #212529;
+}
+
+.avatar-vid{
+    width: 19px;
+    border-radius: 22px;
+}
+
+
+.text-muted a{
+    text-decoration: none;
+    color: #212529;
+}

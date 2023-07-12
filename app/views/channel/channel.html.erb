@@ -1,0 +1,46 @@
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card">
+          <% if @channel.avatar.attached?%>
+            <img src="<%= url_for(@channel.avatar)%>" class="card-img-top">
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= @channel.name %></h5>
+            <a href="#" class="btn btn-danger"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-heart"></i></a>
+            <a href="#" class="btn btn-outline-danger"><i class="fa-solid fa-minus"></i> <i class="fa-solid fa-heart"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+      <% if @channel.about.present?%>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Sobre</h5>
+            <p class="card-text"><%= @channel.about %></p>
+          </div>
+        </div>
+      <% end %>
+        <div class="card mt-4">
+          <div class="card-body">
+            <h5 class="card-title">Videos de <%= @channel.name %></h5>
+            <div class="row">
+              <div class="col-md-6">
+              <% @channel.videos.each do |user_video| %>
+                <%= link_to video_path(user_video) do %>
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <img src="https://i.ytimg.com/vi/<%= user_video.identity %>/maxresdefault.jpg" class="card-img-top"
+                        alt="Thumbnail 1" style="    margin-bottom: 10px;">
+                      <h6 class="card-subtitle mb-2 text-muted"><%= user_video.title %></h6>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
