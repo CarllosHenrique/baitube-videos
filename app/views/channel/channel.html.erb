@@ -7,8 +7,24 @@
           <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= @channel.name %></h5>
-            <a href="#" class="btn btn-danger"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-heart"></i></a>
-            <a href="#" class="btn btn-outline-danger"><i class="fa-solid fa-minus"></i> <i class="fa-solid fa-heart"></i></a>
+            <div style="display: flex;">
+              <button type="button" class="btn btn-danger btn-sm">
+                <i class="fa-solid fa-heart"></i> <%= @channel.subscribed_channels.count %> inscritos
+              </button>
+              <% if channel_signed_in?%>
+                <% if @channel.subscribed_channels.include?(current_channel.slug) %>
+                  <%= button_to unsubscribe_channel_path(@channel),method: :delete, data: {turbo_method: :delete},  class: "btn btn-outline-danger btn-sm" do %>
+                    <i class="fa-solid fa-minus"></i> <i class="fa-solid fa-heart"></i>
+                  <% end %>
+                <% else %>
+                  <%= button_to subscribe_channel_path(@channel), class: "btn btn-danger btn-sm" do %>
+                    <i class="fa-solid fa-plus"></i> <i class="fa-solid fa-heart"></i>
+                  <% end %>
+                <% end %>
+              <% else %>
+              Faça login para se increver nesse canal
+              <% end%>
+            </div>
           </div>
         </div>
       </div>
@@ -17,10 +33,23 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Sobre</h5>
-            <p class="card-text"><%= @channel.about %></p>
+            <p class="card-text"><%= simple_format(@channel.about) %></p>
           </div>
         </div>
       <% end %>
+      <br>
+      <div class="list-group">
+        <li class="list-group-item"><strong>Canais incritos</strong></li>
+        <% @channel.subscribed_channels.each do |channel| %>
+          <a href="<%= channel %>" class="list-group-item list-group-item-action">
+            <% if current_channel.slug == channel %>
+              Você
+            <% else %>
+              <%= channel %>
+            <% end %>
+          </a>
+        <% end %>
+      </div>
         <div class="card mt-4">
           <div class="card-body">
             <h5 class="card-title">Videos de <%= @channel.name %></h5>

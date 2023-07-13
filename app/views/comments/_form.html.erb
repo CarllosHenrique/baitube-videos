@@ -1,0 +1,4 @@
+<%= form_with(model: [video, video.comments.build], method: :post, class: "d-flex") do |form| %>
+  <%= form.text_area :content, class: "form-control me-2", placeholder: "Escreva seu comentário" %>
+  <%= form.submit "Enviar", class: "btn btn-outline-light" %>
+<% end %>

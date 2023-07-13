@@ -16,4 +16,5 @@ class Channel < ApplicationRecord
                              size_range: 1..(5.megabytes) }
 
   has_many :videos, dependent: :destroy
+  has_many :comments, dependent: :destroy
 end

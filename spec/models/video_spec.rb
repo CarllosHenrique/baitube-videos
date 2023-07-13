@@ -70,19 +70,19 @@ RSpec.describe Video, type: :model do
       end
     end
 
-    it 'Invalid more than 50 characters' do
+    it 'Invalid more than 150 characters' do
       video = Video.new(
-        title: 'V' * 51,
+        title: 'V' * 151,
         description: 'Video Description',
-        identity: '1' * 51,
+        identity: '1' * 151,
         channel:,
-        video_url: 'https' * 51
+        video_url: 'https' * 151
       )
       expect(video).to_not be_valid
       att = [:title, :identity, :video_url]
 
       att.each do |key|
-        expect(video.errors[key]).to include("is too long (maximum is 50 characters)")
+        expect(video.errors[key]).to include("is too long (maximum is 150 characters)")
       end
     end
   end
@@ -111,16 +111,16 @@ RSpec.describe Video, type: :model do
       expect(video.errors[:description]).to include("is too short (minimum is 15 characters)")
     end
 
-    it 'Invalid more than 1500 characters' do
+    it 'Invalid more than 5000 characters' do
       video = Video.new(
         title: 'v' * 10,
-        description: 'D' * 1501,
+        description: 'D' * 5001,
         identity: '1EnciVkwyD0',
         channel:,
         video_url: 'https://www.youtube.com/watch?v=1EnciVkwyD0'
       )
       expect(video).to_not be_valid
-      expect(video.errors[:description]).to include("is too long (maximum is 1500 characters)")
+      expect(video.errors[:description]).to include("is too long (maximum is 5000 characters)")
     end
   end
 end

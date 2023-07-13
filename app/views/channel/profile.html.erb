@@ -42,6 +42,21 @@
           </div>
         </div>
       <% end %>
+      <br>
+      <div class="list-group">
+        <li class="list-group-item"><strong>Canais incritos</strong></li>
+        <% current_channel.subscribed_channels.each do |channel| %>
+          <a href="<%= channel %>" class="list-group-item list-group-item-action">
+            <%= channel %>
+          </a>
+        <% end %>
+      </div>
+      <br>
+        <div class="card">
+          <div class="card-body">
+              <button type="button" class="btn btn-danger btn-sm"><i class="fa-solid fa-heart"></i> <%= current_channel.subscribed_channels.count %> inscritos</button>
+          </div>
+        </div>
         <div class="card mt-4">
           <div class="card-body">
             <h5 class="card-title">Seus Videos</h5>

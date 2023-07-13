@@ -1,0 +1,36 @@
+<div class="col-lg-4">
+    <div class="related-videos">
+      <div class="list-group">
+        <% @videos.each do |video|%>
+          <% if @video != video %>
+            <%= link_to video_path(video) do %>
+              <div class="card mb-3">
+                <div class="row g-0">
+                    <img src="https://i.ytimg.com/vi/<%= video.identity %>/maxresdefault.jpg"
+                      class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        <%= video.title %>
+                      </h5>
+                      <p class="card-text">
+                      <%= link_to user_channel_path(video.channel) do %>
+                          <% if video.channel.avatar.attached?%>
+                              <%= image_tag video.channel.avatar, class: "avatar-vid" %>
+                          <% end %>
+                          <%= video.channel.name %>
+                      <% end %>
+                      </p>
+                      <p class="card-text"><small class="text-body-secondary">
+                          <%= time_ago_in_words(video.created_at) %>
+                        </small></p>
+                    </div>
+                </div>
+              </div>
+              <% end %>
+            <% end %>
+          <% end %>
+      </div>
+    </div>
+  </div>

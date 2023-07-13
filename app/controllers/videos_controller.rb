@@ -1,5 +1,5 @@
 class VideosController < ApplicationController
-  before_action :find_video, only: [:edit, :update, :show, :destroy]
+  before_action :find_video, only: %i[show like deslike]
   before_action :authenticate_channel!, only: %i[new create]
 
   def new
@@ -19,6 +19,16 @@ class VideosController < ApplicationController
 
   def show
     @videos = Video.all
+  end
+
+  def like
+    @video.like
+    redirect_to @video
+  end
+
+  def deslike
+    @video.dislike
+    redirect_to @video
   end
 
   private
