@@ -29,7 +29,6 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
-
 gem 'activestorage-validator'
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
@@ -75,4 +74,4 @@ gem "devise", "~> 4.9"
 
 gem "youtube_addy", "~> 1.0"
 
-gem "dockerfile-rails", ">= 1.5", :group => :development
+gem "dockerfile-rails", ">= 1.5", group: :development

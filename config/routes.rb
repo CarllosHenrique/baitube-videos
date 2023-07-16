@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     member do
       patch 'like', to: 'videos#like', as: 'create_like'
       patch 'deslike', to: 'videos#deslike', as: 'create_deslike'
+      post 'denounce', to: 'videos#denounce', as: 'send_denounce'
     end
   end
 end

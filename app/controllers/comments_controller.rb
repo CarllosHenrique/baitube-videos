@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_channel!, only: %i[create]
+
   def create
     @video = Video.friendly.find(params[:video_id])
     @comment = @video.comments.build(comment_params)

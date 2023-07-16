@@ -16,7 +16,12 @@ class Video < ApplicationRecord
   end
 
   def dislike
-    self.dislikes += 1
+    self.deslikes += 1
+    save
+  end
+
+  def denounce
+    self.denounces += 1
     save
   end
 end

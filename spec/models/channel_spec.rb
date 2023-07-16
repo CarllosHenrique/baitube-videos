@@ -7,7 +7,8 @@ RSpec.describe Channel, type: :model do
                             slug: 'channel',
                             about: 'this is my channel',
                             email: 'my@example.com',
-                            password: 'mypassword')
+                            password: 'mypassword',
+                            subscribed_channels: %w[user1 user2])
       expect(channel).to be_valid
     end
 

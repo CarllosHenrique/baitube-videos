@@ -11,64 +11,77 @@
       <div class="channel-informations" style="color: #fff">
         <%= link_to user_channel_path(@video.channel) do %>
           <% if @video.channel.avatar.attached?%>
-              <%= image_tag @video.channel.avatar, class: "avatar-vid", style:"width: 37px;"%>
-          <% end %>
-          <%= @video.channel.name %>
-        <% end %>
+            <%= image_tag @video.channel.avatar, class: "avatar-vid" , style:"width: 37px;"%>
+              <% end %>
+                <%= @video.channel.name %>
+                  <% end %>
       </div>
       <br>
-      <div class="video-buttons" style="margin-left: 60%;display: flex;">
-        <%= button_to create_like_video_path(@video.id), method: :patch, class: "btn btn-outline-danger btn-sm" do %>
-          <i class="fa-solid fa-heart fa-beat"></i> <%= @video.likes %>
-        <% end %>
+      <div class="video-buttons" style="margin-left: 56%;display: flex;">
+        <%= button_to create_like_video_path, method: :patch, class: "btn btn-outline-danger btn-sm" do %>
+          <i class="fa-solid fa-heart fa-beat"></i>
+          <%= @video.likes %>
+            <% end %>
 
-        <%= button_to create_deslike_video_path(@video.id), class:"btn btn-outline-secondary btn-sm", method: :patch do %>
-          <i class="fa-solid fa-thumbs-down"></i> <%= @video.deslikes %>
-        <% end %>
+              <%= button_to create_deslike_video_path, class:"btn btn-outline-secondary btn-sm", method:
+                :patch do %>
+                <i class="fa-solid fa-thumbs-down"></i>
+                <%= @video.deslikes %>
+                  <% end %>
+                  <button class="btn btn-outline-secondary btn-sm">
+                      <i class="fa-solid fa-triangle-exclamation"></i> <%= @video.denounces %>
+                    </button>
 
+                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" role="button"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa-solid fa-sliders"></i>
+                    </button>
 
-          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-sliders"></i>
-          </button>
+                    <ul class="dropdown-menu">
+                      <% if channel_signed_in? && @video.channel.id == current_channel.id%>
+                        <li>
+                          <%= link_to @video, data: {turbo_method: :delete}, class:"dropdown-item" do %>
+                            <i class="fa-solid fa-trash"></i> Deletar
+                            <% end %>
+                              <%= link_to edit_video_path(@video), class:"dropdown-item" do %>
+                                <i class="fa-solid fa-pen-to-square"></i> Editar
+                                <% end %>
+                        </li>
 
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </div>
+                        <hr>
+                        <% end %>
+                          <li>
+                            <button type="button" class="dropdown-item" data-bs-toggle="modal"
+                              data-bs-target="#staticBackdrop">
+                              <i class="fa-solid fa-share"></i> Compartilhar
+                            </button>
+                          </li>
+                          <li>
+                            <% if channel_signed_in? %>
+                              <%= button_to send_denounce_video_path, class: "dropdown-item" do %>
+                                <i class="fa-solid fa-triangle-exclamation"></i> Denunciar
+                              <% end %>
+                            <% end %>
+                          </li>
+
+                    </ul>
+      </div>
     </div>
+    <%= render "videos/shared/copyboard" %>
     <div class="video-description">
-      <%= simple_format(@video.description) %>
+      <pre><%= simple_format(@video.description) %></pre>
     </div>
 
     <div class="comment-form">
       <% if channel_signed_in? %>
-        <%= render "comments/form", video: @video %>
-      <% else %>
-        <p style="color: #fff;">Faça <%= link_to "login", new_channel_session_path %> para comentar nesse video</p>
-      <% end %>
+        <%= render "comments/form" , video: @video %>
+          <% else %>
+            <p style="color: #fff;">Faça <%= link_to "login" , new_channel_session_path %> para comentar nesse video</p>
+            <% end %>
     </div>
     <br>
     <div class="comment-view">
-    <% @video.comments.each do |comment|%>
-      <% if comment.channel %>
-        <%= link_to user_channel_path(comment.channel) do %>
-          <div class="card">
-          <div class="card-header">
-            <%= comment.channel.name %>
-          </div>
-            <div class="card-body">
-              <% if comment.channel.avatar.attached?%>
-                <%= image_tag comment.channel.avatar, class: "avatar-vid", style:"width: 37px;"%>
-              <% end %>
-        <% end %>
-              <%= comment.content %>
-            </div>
-          </div>
-          <br>
-        <% end %>
-      <% end %>
+      <%= render "comments/comments" , video: @video %>
     </div>
 
   </div>

@@ -1,0 +1,18 @@
+<% video.comments.each do |comment|%>
+    <% if comment.channel %>
+        <div class="card">
+        <div class="card-header">
+        <%= link_to user_channel_path(comment.channel) do %>
+            <% if comment.channel.avatar.attached? %>
+                <%= image_tag comment.channel.avatar, class: "avatar-vid", style:"width: 37px;"%>
+            <% end %>
+            <%= comment.channel.name %>
+        <% end %>
+        </div>
+        <div class="card-body">
+            <%= simple_format(comment.content) %>
+        </div>
+        </div>
+        <br>
+    <% end %>
+<% end %>

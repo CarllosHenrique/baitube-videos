@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_13_171342) do
+ActiveRecord::Schema[7.0].define(version: 20_230_716_015_003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_171342) do
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+    t.index %w[record_type record_id name blob_id], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
@@ -39,7 +39,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_171342) do
   create_table "active_storage_variant_records", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+    t.index %w[blob_id variation_digest], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "channels", force: :cascade do |t|
@@ -48,7 +48,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_171342) do
     t.string "encrypted_password", default: "", null: false
     t.text "about", default: "Hi! This is my channel"
     t.jsonb "subscribed_channels", default: []
-    t.jsonb "subscribed_by", default: []
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -76,9 +75,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_171342) do
     t.string "sluggable_type", limit: 50
     t.string "scope"
     t.datetime "created_at"
-    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+    t.index %w[slug sluggable_type scope], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index %w[slug sluggable_type], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index %w[sluggable_type sluggable_id], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   create_table "videos", force: :cascade do |t|
@@ -92,6 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_171342) do
     t.string "identity"
     t.integer "likes", default: 0
     t.integer "deslikes", default: 0
+    t.integer "denounces", default: 0
     t.index ["channel_id"], name: "index_videos_on_channel_id"
     t.index ["slug"], name: "index_videos_on_slug", unique: true
   end

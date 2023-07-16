@@ -1,6 +1,6 @@
 class VideosController < ApplicationController
-  before_action :find_video, only: %i[show like deslike]
-  before_action :authenticate_channel!, only: %i[new create]
+  before_action :find_video, only: %i[show like deslike destroy edit update denounce]
+  before_action :authenticate_channel!, except: %i[show denounce]
 
   def new
     @video = Video.new
@@ -17,6 +17,22 @@ class VideosController < ApplicationController
     end
   end
 
+  def destroy
+    return unless @video.destroy
+
+    flash[:success] = "O video #{@video.title} foi excluido"
+    redirect_to root_path
+  end
+
+  def edit; end
+
+  def update
+    return unless @video.update(video_params)
+
+    redirect_to @video
+    flash[:notice] = "#{@video.title} foi editado com sucesso"
+  end
+
   def show
     @videos = Video.all
   end
@@ -29,6 +45,18 @@ class VideosController < ApplicationController
   def deslike
     @video.dislike
     redirect_to @video
+  end
+
+  def denounce
+    @video.denounce
+
+    if @video.denounces >= 5
+      @video.destroy
+      flash[:notice] = "O video #{@video.title} foi excluido por conter muitas denuncias"
+      redirect_to root_path
+    else
+      redirect_to @video
+    end
   end
 
   private

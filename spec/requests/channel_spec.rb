@@ -23,6 +23,20 @@ RSpec.describe "channel routes", type: :request do
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(my_channel_path)
     end
+
+    it 'returns http subscribe channel redirect' do
+      post subscribe_channel_path(channel)
+
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(user_channel_path(channel))
+    end
+
+    it 'returns http unsubscribe channel redirect' do
+      delete unsubscribe_channel_path(channel)
+
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(user_channel_path(channel))
+    end
   end
 
   context "User channel routes" do

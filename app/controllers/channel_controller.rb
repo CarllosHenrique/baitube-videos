@@ -1,6 +1,6 @@
 class ChannelController < ApplicationController
-  before_action :authenticate_channel!, only: %i[profile]
-  before_action :find_channel, only: %i[channel subscribe_channel unsubscribe_channel]
+  before_action :authenticate_channel!, only: [:profile]
+  before_action :find_channel, only: [:channel, :subscribe_channel, :unsubscribe_channel]
 
   def profile; end
 
@@ -14,7 +14,7 @@ class ChannelController < ApplicationController
 
   def update
     if current_channel.update(user_params)
-      flash[:success] = "Você atualizou suas informaçoes com sucesso!"
+      flash[:success] = "Você atualizou suas informações com sucesso!"
       redirect_to my_channel_path
     else
       render :edit, status: :unprocessable_entity
@@ -22,21 +22,28 @@ class ChannelController < ApplicationController
   end
 
   def subscribe_channel
-    @channel.subscribed_channels << current_channel.slug
-    @channel.save
-    redirect_to user_channel_path(@channel)
+    update_subscribed_channels(true)
   end
 
   def unsubscribe_channel
-    @channel.subscribed_channels.delete(current_channel.slug)
-    @channel.save
-    redirect_to user_channel_path(@channel)
+    update_subscribed_channels(false)
   end
 
   private
 
   def find_channel
     @channel = Channel.friendly.find(params[:id])
+  end
+
+  def update_subscribed_channels(subscribe)
+    if subscribe
+      @channel.subscribed_channels << current_channel.slug
+    else
+      @channel.subscribed_channels.delete(current_channel.slug)
+    end
+
+    @channel.save
+    redirect_to user_channel_path(@channel)
   end
 
   def user_params

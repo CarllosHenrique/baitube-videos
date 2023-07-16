@@ -18,7 +18,9 @@ RSpec.describe Video, type: :model do
         description: 'Video Description',
         identity: '1EnciVkwyD0',
         channel:,
-        video_url: 'https://www.youtube.com/watch?v=1EnciVkwyD0'
+        video_url: 'https://www.youtube.com/watch?v=1EnciVkwyD0',
+        likes: 23,
+        deslikes: 21
       )
 
       expect(video).to be_valid
@@ -30,7 +32,9 @@ RSpec.describe Video, type: :model do
         description: nil,
         identity: nil,
         channel:,
-        video_url: nil
+        video_url: nil,
+        likes: nil,
+        deslikes: nil
       )
 
       expect(video).to_not be_valid
